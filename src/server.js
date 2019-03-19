@@ -1,6 +1,9 @@
 'use strict';
 
 import { Server } from 'hapi';
+import lout from 'lout'
+import vision from 'vision';
+import inert from 'inert';
 
 const server = new Server({
     port: 3000,
@@ -11,6 +14,7 @@ const server = new Server({
 });
 
 const init = async () => {
+    await server.register([vision, inert, lout]);
     await server.start();
 
     console.log(`Server running at: ${server.info.uri}`);
@@ -22,4 +26,3 @@ process.on('unhandledRejection', (err) => {
 });
 
 init();
-
