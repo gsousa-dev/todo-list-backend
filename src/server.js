@@ -1,6 +1,7 @@
 'use strict';
 
 import { Server } from 'hapi';
+import routes from './routes/index';
 import lout from 'lout'
 import vision from 'vision';
 import inert from 'inert';
@@ -13,6 +14,7 @@ const server = new Server({
     }
 });
 
+server.route(routes);
 const init = async () => {
     await server.register([vision, inert, lout]);
     await server.start();
