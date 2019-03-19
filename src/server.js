@@ -1,8 +1,8 @@
 'use strict';
 
 import { Server } from 'hapi';
-import { fetchTasks } from './actions/todos';
 import { ALL, DATE_ADDED } from './utils/todos.constants';
+import DB from './db/index';
 import routes from './routes/index';
 import lout from 'lout'
 import vision from 'vision';
@@ -18,7 +18,7 @@ const server = new Server({
     }
 });
 
-server.method('fetchTasks', fetchTasks, {
+server.method('fetchTasks', DB.actions.getTasks, {
     cache: {
         expiresIn: TTL,
         generateTimeout: 3000
