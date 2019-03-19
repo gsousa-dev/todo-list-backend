@@ -16,6 +16,7 @@
     "inert": "^5.1.2",
     "joi": "^14.3.1",
     "lout": "^11.1.0",
+    "uuid": "^3.3.2",
     "vision": "^5.4.4"
   },
   "devDependencies": {
