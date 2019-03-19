@@ -1,33 +1,27 @@
 'use strict';
 
+import Handlers from './handlers/todos';
+
 const routes = [
     { // Fetch tasks
         method: 'GET',
         path: '/todos',
-        handler: (request, h) => {
-
-        }
+        handler: Handlers.fetchTasks
     },
     { // Create a task
         method: 'PUT',
         path: '/todos',
-        handler: (request, h) => {
-
-        }
+        handler: Handlers.createTask
     },
     { // Update a task
         method: 'PATCH',
         path: '/todo/{id}',
-        handler: (request, h) => {
-
-        }
+        handler: Handlers.updateTask
     },
     { // Delete a task
         method: 'DELETE',
         path: '/todo/{id}',
-        handler: (request, h) => {
-            
-        }
+        handler: Handlers.deleteTask
     }
 ];
 
