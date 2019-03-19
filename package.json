@@ -9,6 +9,6 @@
   "author": "Guilherme Sousa",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^18.1.0",
-  },
+    "hapi": "^18.1.0"
+  }
 }
