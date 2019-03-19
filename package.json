@@ -4,11 +4,19 @@
   "description": "",
   "main": "./src/server.js",
   "scripts": {
+    "build": "babel src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Guilherme Sousa",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "hapi": "^18.1.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4"
   }
 }
