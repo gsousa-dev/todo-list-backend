@@ -7,8 +7,8 @@ const Validators = {
 
     fetchTasks: {
         query: {
-            filter: Joi.string().trim().valid(ALL, COMPLETE, INCOMPLETE).optional(),
-            orderBy: Joi.string().trim().valid(DESCRIPTION, DATE_ADDED).optional()
+            filter: Joi.valid(ALL, COMPLETE, INCOMPLETE).optional(),
+            orderBy: Joi.valid(DESCRIPTION, DATE_ADDED).optional()
         },
         failAction: (request, h, err) => {
             return err;
