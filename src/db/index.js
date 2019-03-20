@@ -2,7 +2,6 @@
 
 import { ALL, COMPLETE, DATE_ADDED, DELETED, DESCRIPTION, INCOMPLETE } from '../utils/todos.constants';
 import uuidv1 from 'uuid/v1';
-import Hoek from 'hoek';
 import Boom from 'boom';
 
 // Fake Database
@@ -19,8 +18,6 @@ const DB = {
 
     actions: {
         getTasks: async (filter = ALL, orderBy = DATE_ADDED) => {
-            await Hoek.wait(2000);
-
             const filteredTasks = DB.tasks.filter((task) => {
                 if (filter === ALL && task.state !== DELETED) {
                     return true;
