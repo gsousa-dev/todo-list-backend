@@ -28,7 +28,7 @@ const Handlers = {
                 return h.response().code(400);
             }
 
-            await server.methods.fetchTasks.cache.drop();
+            await server.methods.clearCache();
 
             return h.response(newTask).code(201);
         } catch (error) {
@@ -47,7 +47,7 @@ const Handlers = {
                 return updatedTask;
             }
 
-            await server.methods.fetchTasks.cache.drop();
+            await server.methods.clearCache();
 
             return h.response(updatedTask).code(200);
         } catch (error) {
@@ -66,7 +66,7 @@ const Handlers = {
                 return h.response().code(404);
             }
 
-            await server.methods.fetchTasks.cache.drop();
+            await server.methods.clearCache();
 
             return h.response().code(200);
         } catch (error) {

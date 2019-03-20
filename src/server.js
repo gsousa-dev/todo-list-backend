@@ -18,13 +18,38 @@ const server = new Server({
     }
 });
 
+let cacheKeys = [];
+
+const clearCache = () => {
+    if (cacheKeys.length) {
+        cacheKeys.forEach(async (key) => {
+            await server.methods.fetchTasks.cache.drop(key);
+        });
+    
+        cacheKeys = [];
+    }
+};
+
+server.method('clearCache', clearCache);
+
 server.method('fetchTasks', DB.actions.getTasks, {
     cache: {
         expiresIn: TTL,
-        generateTimeout: 3000
+        generateTimeout: 4000
     },
-    generateKey: (filter = ALL, orderBy = DATE_ADDED) => {
-        return [filter, orderBy].join();
+    generateKey: (...args) => {
+        let [ filter, orderBy ] = args;
+
+        filter = filter || ALL;
+        orderBy = orderBy || DATE_ADDED;
+
+        const key = args.join();
+
+        if (!cacheKeys.includes(key)) {
+            cacheKeys.push(key);
+        }
+
+        return args.join();
     }
 });
 
