@@ -2,6 +2,7 @@
 
 import DB from '../../db';
 import server from '../../server';
+import Boom from 'boom';
 
 const Handlers = {
 
@@ -40,10 +41,10 @@ const Handlers = {
     updateTask: async (request, h) => {
         try {
             const id = encodeURIComponent(request.params.id);
-            const updatedTask = DB.actions.updateTask(id);
+            const updatedTask = DB.actions.updateTask(id, request.payload);
             
-            if (!updatedTask) {
-                return h.response().code(404);
+            if (updatedTask instanceof Boom) {
+                return updatedTask;
             }
 
             await server.methods.fetchTasks.cache.drop();

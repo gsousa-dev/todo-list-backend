@@ -25,6 +25,14 @@ const Validators = {
         params: {
             id: Joi.string().trim().required()
         },
+        payload: {
+            state: Joi.valid(COMPLETE, INCOMPLETE).when('description', {
+                is: Joi.exist(),
+                then: Joi.optional(),
+                otherwise: Joi.required()
+            }),
+            description: Joi.string().trim().optional(),
+        },
         failAction: (request, h, err) => {
             return err;
         }

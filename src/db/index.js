@@ -3,6 +3,7 @@
 import { ALL, COMPLETE, DATE_ADDED, DELETED, DESCRIPTION, INCOMPLETE } from '../utils/todos.constants';
 import uuidv1 from 'uuid/v1';
 import Hoek from 'hoek';
+import Boom from 'boom';
 
 // Fake Database
 const DB = {
@@ -63,18 +64,30 @@ const DB = {
             return newTask;
         },
 
-        updateTask: (id) => {
+        updateTask: (id, { description, state }) => {
             const index = DB.tasks.findIndex((task) => {
                 return task.state !== DELETED && task.id === id;
             });
 
             if (index === -1) {
-                return;
+                return Boom.notFound();
             }
 
-            DB.tasks[index].state = (DB.tasks[index].state === COMPLETE) ? INCOMPLETE : COMPLETE
+            const task = DB.tasks[index];
 
-            return DB.tasks[index];
+            if (task.state === COMPLETE) {
+                return Boom.badRequest();
+            }
+
+            if (state) {
+                task.state = state;
+            }
+
+            if (description) {
+                task.description = description
+            }
+
+            return task;
         },
 
         deleteTask: (id) => {
