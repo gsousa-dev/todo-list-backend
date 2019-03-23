@@ -11,7 +11,7 @@ import inert from 'inert';
 const TTL = 5 * 60 * 1000; // 5 minutes
 
 const server = new Server({
-    port: 3000,
+    port: 3001,
     host: 'localhost',
     routes: {
         cors: true
